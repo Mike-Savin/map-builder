@@ -1,0 +1,11 @@
+<section class="container">
+  <h1>Maps</h1>
+
+  <% if (typeof maps !== 'undefined') { %>
+    <ul class="maps-list">
+      <% maps.forEach(function (map) { %>
+        <li><%- link_to(map.name, '/maps/' + map.id) %></li>
+      <% }); %>
+    </ul>
+  <% } %>
+</section>
