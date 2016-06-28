@@ -21,6 +21,13 @@
  */
 
 module.exports.routes = {
-  'get /maps': 'MapsController.index',
-  'get /maps/:id': 'MapsController.show'
+  'post /users': 'UsersController.create',
+  'post /users/sessions': 'UsersSessionsController.create',
+
+  'get /users/passwords/new': 'UsersPasswordsController.new',
+  'get /users/passwords/edit': 'UsersPasswordsController.edit',
+  'post /users/:id/passwords': 'UsersPasswordsController.update',
+
+  'get users/maps': 'MapsController.index',
+  'get users/maps/:id': 'MapsController.show'
 };

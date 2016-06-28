@@ -1,3 +1,1 @@
-module.exports.globals = {
-  sails.serialPort = require('serialport');
-};
+module.exports.globals = {};

@@ -1,19 +1,35 @@
 module.exports = {
   attributes: {
     x: {
-      type: 'integer'
+      type: 'integer',
+      required: true
     },
 
     y: {
-      type: 'integer'
+      type: 'integer',
+      required: true
+    },
+
+    z: {
+      type: 'integer',
+      required: true,
+      defaultsTo: 0
     },
 
     type: {
-      type: 'integer'
+      type: 'integer',
+      required: true,
+      defaultsTo: 0
+    },
+
+    date: {
+      type: 'datetime',
+      required: true
     },
 
     map: {
-      model: 'Map'
+      model: 'Map',
+      required: true
     }
   }
 };
