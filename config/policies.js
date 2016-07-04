@@ -9,11 +9,15 @@ module.exports.policies = {
     'create': true
   },
 
-  MapsController: {
+  UsersPasswordsController: {
+    '*': true
+  },
+
+  UsersMapsController: {
     '*': 'hasToken'
   },
 
-  UsersPasswordsController: {
-    '*': true
+  'UsersMapsPointsController': {
+    '*': 'hasToken'
   }
 };

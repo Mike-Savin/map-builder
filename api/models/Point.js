@@ -31,5 +31,24 @@ module.exports = {
       model: 'Map',
       required: true
     }
+  },
+
+  validationMessages: {
+    x: {
+      required: 'SERVER.ERROR.X.REQUIRED'
+    },
+    y: {
+      required: 'SERVER.ERROR.Y.REQUIRED'
+    },
+    type: {
+      required: 'SERVER.ERROR.TYPE.REQUIRED'
+    },
+    date: {
+      required: 'SERVER.ERROR.DATE.REQUIRED',
+      datetime: 'SERVER.ERROR.DATE.INVALID'
+    },
+    map: {
+      required: 'SERVER.ERROR.MAP.REQUIRED'
+    }
   }
 };

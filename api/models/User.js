@@ -34,6 +34,11 @@ module.exports = {
       via: 'owner'
     },
 
+    robotId: {
+      type: 'string',
+      required: true
+    },
+
     toJSON: function () {
       var obj = this.toObject();
       delete obj.password;
@@ -52,10 +57,13 @@ module.exports = {
     },
     password: {
       minLength: 'SERVER.ERROR.PASSWORD.TOO_SHORT'
+    },
+    robotId: {
+      required: 'SERVER.ERROR.ROBOT_ID.REQUIRED',
     }
   },
 
-  afterCreate: function (user, cb) {
+  beforeCreate: function (user, cb) {
     user.password = aes.encrypt(user.password, user.email).toString();
     user.accessToken = aes.encrypt(user.email, user.email).toString();
     cb(null, user);

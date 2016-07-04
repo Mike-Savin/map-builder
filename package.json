@@ -24,6 +24,7 @@
     "grunt-sync": "0.2.4",
     "include-all": "~0.1.6",
     "machinepack-mandrill": "^1.2.0",
+    "moment": "^2.13.0",
     "q": "^1.4.1",
     "rc": "1.0.1",
     "sails": "~0.12.3",

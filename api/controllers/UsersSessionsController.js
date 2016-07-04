@@ -9,7 +9,7 @@ module.exports = {
         error = 'SERVER.ERROR.PASSWORD';//Incorrect password
       }
       if (!error) {
-        return res.json({user: user});
+        return res.json(user);
       }
       res.error({status: 400, key: error});
     }, function (error) {

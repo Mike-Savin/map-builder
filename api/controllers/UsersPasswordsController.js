@@ -10,9 +10,6 @@ module.exports = {
       }
       return false;
     }).then(function () {
-      console.log(user);
-      console.log(Email);
-
       if (user) {
         return Email.send({
           subject: 'Map builder password reset',
@@ -40,7 +37,7 @@ module.exports = {
       data = {model: 'users'};
     User.findOne({resetPasswordToken: token}).then(function (foundUser) {
       if (foundUser) {
-        data.id = foundUser.id;
+        data.token = foundUser.resetPasswordToken;
       } else {
         data.message = 'Your token expired. Please, try again';
       }
@@ -50,7 +47,7 @@ module.exports = {
 
   update: function (req, res) {
     var pwd = req.param('password'), data = {model: 'users'};
-    User.findOne(req.param('id')).then(function (user) {
+    User.findOne({resetPasswordToken: req.param('token')}).then(function (user) {
       if (!user) {
         data.message = 'User with provided id not found';
         return false;

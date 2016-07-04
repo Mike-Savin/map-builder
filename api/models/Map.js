@@ -10,6 +10,26 @@ module.exports = {
       via: 'map'
     },
 
+    active: {
+      type: 'boolean',
+      defaultsTo: true
+    },
+
+    currentX: {
+      type: 'integer',
+      defaultsTo: 0
+    },
+
+    currentY: {
+      type: 'integer',
+      defaultsTo: 0
+    },
+
+    currentAngle: {
+      type: 'integer',
+      defaultsTo: 90
+    },
+
     owner: {
       model: 'User',
       required: true
@@ -20,10 +40,5 @@ module.exports = {
     name: {
       required: 'SERVER.ERROR.NAME.REQUIRED'
     }
-  },
-
-  toJSON: function () {
-    var obj = this.toObject();
-    return obj.populate('points');
   }
 };

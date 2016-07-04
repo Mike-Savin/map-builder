@@ -3,11 +3,15 @@ module.exports = function hasToken(req, res, next) {
   if (accessToken) {
     User.findOne({accessToken: accessToken}).then(function (user) {
       if (user) {
+        req.currentUser = {
+          id: user.id,
+          email: user.email
+        };
         return next();
       }
-      return res.unauthorized();
+      res.error({status: 403, key: 'SERVER.ERROR.UNAUTHORIZED'});
     });
   } else {
-    return res.unauthorized();
+    res.error({status: 403, key: 'SERVER.ERROR.UNAUTHORIZED'});
   }
 };
