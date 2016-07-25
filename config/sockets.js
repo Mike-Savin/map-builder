@@ -45,7 +45,7 @@ module.exports.sockets = {
   //
 
   // adapter: 'socket.io-redis',
-  // host: '127.0.0.1',
+  host: 'https://mapbuilderapi.herokuapp.com',
   // port: 6379,
   // db: 0,
   // pass: '<redis auth password>',
