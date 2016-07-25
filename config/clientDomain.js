@@ -1,1 +1,1 @@
-module.exports.clientDomain = 'http://localhost:9000';
+module.exports.clientDomain = 'https://mapbuilderapi.herokuapp.com';

@@ -5,8 +5,8 @@ module.exports = {
   connections: {
     production: {
       adapter: 'sails-mongo',
-      host: 'localhost',
-      port: 27017,
+      host: 'ds029725.mlab.com',
+      port: 29725,
       database: 'heroku_dcftb3ds'
     }
   },
