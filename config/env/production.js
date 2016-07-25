@@ -10,5 +10,6 @@ module.exports = {
       database: 'heroku_dcftb3ds'
     }
   },
+  host: 'https://mapbuilderapi.herokuapp.com',
   port: 80
 };
