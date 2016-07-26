@@ -38,6 +38,7 @@
     "uuid": "^2.0.2"
   },
   "scripts": {
+    "postinstall": "bower install -F",
     "debug": "node debug app.js",
     "start": "node app.js"
   },

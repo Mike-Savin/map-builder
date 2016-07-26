@@ -1,1 +1,1 @@
-web: bower i -F && forever app.js --prod
+web: forever app.js --prod
