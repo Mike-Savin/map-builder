@@ -14,8 +14,10 @@ module.exports = function error(error) {
     status = 400;
     result.error = [];
     Object.keys(error.Errors).forEach(function (attribute) {
-      Object.keys(error.Errors[attribute]).forEach(function (rule) {
-        result.error.push(error.Errors[attribute][rule].message);
+      Object.keys(error.Errors[attribute]).forEach(function (index) {
+        if (error.Errors[attribute][index].rule !== 'string') {
+          result.error.push(error.Errors[attribute][index].message);
+        }
       });
     });
   } else if (error.originalError && error.originalError.status === 400) {

@@ -5,7 +5,6 @@ module.exports = {
       user = foundUser;
       if (user) {
         user.resetPasswordToken = sails.uuid.v1();
-        console.log(user);
         return user.save();
       }
       return false;
@@ -68,4 +67,3 @@ module.exports = {
     })
   }
 };
-

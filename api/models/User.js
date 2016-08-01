@@ -56,6 +56,7 @@ module.exports = {
       unique: 'SERVER.ERROR.EMAIL.EXISTS'
     },
     password: {
+      required: 'SERVER.ERROR.PASSWORD.REQUIRED',
       minLength: 'SERVER.ERROR.PASSWORD.TOO_SHORT'
     },
     robotId: {
