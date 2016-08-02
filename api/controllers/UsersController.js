@@ -10,9 +10,8 @@ module.exports = {
         user.maps = [];
         return res.json(user);
       }
-      res.error({status: 500, key: 'SERVER.ERROR.SERVER'});
+      res.error({status: 500, key: 'SERVER.ERROR.INTERNAL'});
     }, function (error) {
-      console.log(error);
       res.error({status: 500, key: error});
     });
   }

@@ -1,6 +1,10 @@
 module.exports.http = {
   middleware: {
     requestLogger: function (req, res, next) {
+      if (sails.config.environment === 'test') {
+        return next();
+      }
+      
       console.log('Requested :: ', req.method, req.url);
       console.log('Content ::');
       ['params', 'query', 'body'].forEach(function (content) {

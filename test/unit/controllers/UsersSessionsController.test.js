@@ -2,7 +2,19 @@ require('sails-test-helper');
 
 describe(TEST_NAME, function () {
   factory.load();
-  var userParams = factory.build('user');
+  var userParams = factory.build('user'),
+    userValidations = [
+      {
+        name: 'invalid email',
+        invalidData: {email: 'foo'},
+        error: 'SERVER.ERROR.EMAIL.INVALID'
+      },
+      {
+        name: 'invalid password',
+        invalidData: {password: 'foo'},
+        error: 'SERVER.ERROR.PASSWORD.INVALID'
+      }
+    ];
 
   describe('POST /users/sessions', function () {
     before(function (done) {
@@ -24,23 +36,15 @@ describe(TEST_NAME, function () {
     });
 
     describe('with invalid parameters', function () {
-      it('should be failed and return error with invalid email', function (done) {
-        userParams = factory.build('user', {email: 'foo'});
+      userValidations.forEach(function (test) {
+        it('should be failed and return error with ' + test.name, function (done) {
+          userParams = factory.build('user', test.invalidData);
 
-        request.post('/users/sessions').send(userParams).end(function (err, res) {
-          res.status.should.equal(400);
-          res.body.error.should.contain('SERVER.ERROR.EMAIL.INVALID');
-          done();
-        });
-      });
-
-      it('should be failed and return error with invalid password', function (done) {
-        userParams = factory.build('user', {password: 'foo'});
-
-        request.post('/users/sessions').send(userParams).end(function (err, res) {
-          res.status.should.equal(400);
-          res.body.error.should.contain('SERVER.ERROR.PASSWORD.INVALID');
-          done();
+          request.post('/users/sessions').send(userParams).end(function (err, res) {
+            res.status.should.equal(400);
+            res.body.error.should.contain(test.error);
+            done();
+          });
         });
       });
     });

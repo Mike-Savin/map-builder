@@ -1,1 +1,0 @@
-module.exports.clientDomain = 'https://mapbuilderapi.herokuapp.com';

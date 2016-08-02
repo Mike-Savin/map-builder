@@ -3,6 +3,7 @@ module.exports = {
     var id = req.param('id'), 
       type = req.param('type'),
       error, coordinates;
+
     Map.findOne({id: id, owner: req.currentUser.id}).then(function (map) {
       if (!map) {
         error = true;
@@ -44,7 +45,6 @@ module.exports = {
       sails.sockets.blast('maps/' + id + '/update', point);
       res.json(200);
     }, function (error) {
-      console.log(error);
       res.error({status: 500, key: error});
     });
   }

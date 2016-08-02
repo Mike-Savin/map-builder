@@ -2,7 +2,39 @@ require('sails-test-helper');
 
 describe(TEST_NAME, function () {
   factory.load();
-  var userParams = factory.build('user');
+  var userParams = factory.build('user'),
+    userValidations = [
+      {
+        name: 'empty name',
+        invalidData: {name: null},
+        error: 'SERVER.ERROR.NAME.REQUIRED'
+      },
+      {
+        name: 'empty email',
+        invalidData: {email: null},
+        error: 'SERVER.ERROR.EMAIL.REQUIRED'
+      },
+      {
+        name: 'empty robotId',
+        invalidData: {robotId: null},
+        error: 'SERVER.ERROR.ROBOT_ID.REQUIRED'
+      },
+      {
+        name: 'empty password',
+        invalidData: {password: null},
+        error: 'SERVER.ERROR.PASSWORD.REQUIRED'
+      },
+      {
+        name: 'invalid email',
+        invalidData: {email: 'foo'},
+        error: 'SERVER.ERROR.EMAIL.INVALID'
+      },
+      {
+        name: 'too short password',
+        invalidData: {password: 'foo'},
+        error: 'SERVER.ERROR.PASSWORD.TOO_SHORT'
+      }
+    ];
 
   describe('POST /users', function () {
     describe('with valid parameters', function () {
@@ -18,63 +50,15 @@ describe(TEST_NAME, function () {
     });
 
     describe('with invalid parameters', function () {
-      it('should be failed and return error with empty name', function (done) {
-        userParams = factory.build('user', {name: null});
+      userValidations.forEach(function (test) {
+        it('should be failed and return error with ' + test.name, function (done) {
+          userParams = factory.build('user', test.invalidData);
 
-        request.post('/users').send(userParams).end(function (err, res) {
-          res.status.should.equal(400);
-          res.body.error.should.contain('SERVER.ERROR.NAME.REQUIRED');
-          done();
-        });
-      });
-
-      it('should be failed and return error with empty email', function (done) {
-        userParams = factory.build('user', {email: null});
-
-        request.post('/users').send(userParams).end(function (err, res) {
-          res.status.should.equal(400);
-          res.body.error.should.contain('SERVER.ERROR.EMAIL.REQUIRED');
-          done();
-        });
-      });
-
-      it('should be failed and return error with empty robotId', function (done) {
-        userParams = factory.build('user', {robotId: null});
-
-        request.post('/users').send(userParams).end(function (err, res) {
-          res.status.should.equal(400);
-          res.body.error.should.contain('SERVER.ERROR.ROBOT_ID.REQUIRED');
-          done();
-        });
-      });
-
-      it('should be failed and return error with empty password', function (done) {
-        userParams = factory.build('user', {password: null});
-
-        request.post('/users').send(userParams).end(function (err, res) {
-          res.status.should.equal(400);
-          res.body.error.should.contain('SERVER.ERROR.PASSWORD.REQUIRED');
-          done();
-        });
-      });
-
-      it('should be failed and return error with invalid email', function (done) {
-        userParams = factory.build('user', {email: 'foo'});
-
-        request.post('/users').send(userParams).end(function (err, res) {
-          res.status.should.equal(400);
-          res.body.error.should.contain('SERVER.ERROR.EMAIL.INVALID');
-          done();
-        });
-      });
-
-      it('should be failed and return error with too short password', function (done) {
-        userParams = factory.build('user', {password: 'foo'});
-
-        request.post('/users').send(userParams).end(function (err, res) {
-          res.status.should.equal(400);
-          res.body.error.should.contain('SERVER.ERROR.PASSWORD.TOO_SHORT');
-          done();
+          request.post('/users').send(userParams).end(function (err, res) {
+            res.status.should.equal(400);
+            res.body.error.should.contain(test.error);
+            done();
+          });
         });
       });
 

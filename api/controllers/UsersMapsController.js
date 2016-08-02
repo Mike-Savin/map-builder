@@ -3,7 +3,6 @@ module.exports = {
     Map.find({owner: req.currentUser.id}).then(function (maps) {
       res.json(maps);
     }, function (error) {
-      console.log(error);
       res.error({status: 500, key: error});
     });
   },
@@ -15,7 +14,6 @@ module.exports = {
       }
       res.json(map);
     }, function (error) {
-      console.log(error);
       res.error({status: 500, key: error});
     });
   },
@@ -34,7 +32,6 @@ module.exports = {
       sails.sockets.blast('robots/' + user.robotId + '/start', map.id);
       res.json(map.id);
     }, function (error) {
-      console.log(error);
       res.error({status: 500, key: error});
     });
   },

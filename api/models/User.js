@@ -65,8 +65,8 @@ module.exports = {
   },
 
   beforeCreate: function (user, cb) {
-    user.password = aes.encrypt(user.password, user.email).toString();
-    user.accessToken = aes.encrypt(user.email, user.email).toString();
+    user.password = aes.encrypt(user.password, process.env.SALT).toString();
+    user.accessToken = aes.encrypt(user.email, process.env.SALT).toString();
     cb(null, user);
   }
 };

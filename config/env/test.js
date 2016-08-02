@@ -7,5 +7,8 @@ module.exports = {
     test: {
       adapter: 'sails-memory'
     }
+  },
+  log: {
+    level: 'silent'
   }
 };

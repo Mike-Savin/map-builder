@@ -39,6 +39,9 @@ module.exports = {
   validationMessages: {
     name: {
       required: 'SERVER.ERROR.NAME.REQUIRED'
+    },
+    owner: {
+      required: 'SERVER.ERROR.OWNER.REQUIRED'
     }
   }
 };

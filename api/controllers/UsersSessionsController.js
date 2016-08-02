@@ -5,7 +5,7 @@ module.exports = {
       if (!user) {
         error = 'SERVER.ERROR.EMAIL.INVALID';
       }
-      if (user && sails.crypto.AES.decrypt(user.password, user.email).toString(sails.crypto.enc.Utf8) !== req.param('password')) {
+      if (user && sails.crypto.AES.decrypt(user.password, process.env.SALT).toString(sails.crypto.enc.Utf8) !== req.param('password')) {
         error = 'SERVER.ERROR.PASSWORD.INVALID';
       }
       if (!error) {

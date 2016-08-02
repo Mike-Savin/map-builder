@@ -15,7 +15,8 @@ module.exports = {
           toEmail: user.email,
           fromName: 'Map builder',
           fromEmail: 'mikesavin@outlook.com',
-          message: sails.config.domain + '/users/passwords/edit?token=' + user.resetPasswordToken,
+          message: 'Visit this link to change password: ' + process.env.SERVER_HOST +
+            '/users/passwords/edit?token=' + user.resetPasswordToken,
           returnItem: user
         });
       }
@@ -27,7 +28,7 @@ module.exports = {
         res.error({status: 404, key: 'SERVER.ERROR.EMAIL.NOT_FOUND'});
       }
     }, function (error) {
-      res.error({status: 500, key: 'SERVER.ERROR.SERVER'});
+      res.error({status: 500, key: 'SERVER.ERROR.INTERNAL'});
     })
   },
 
@@ -56,7 +57,7 @@ module.exports = {
         data.notice = 'Password is required and should contain at least 8 characters';
         return false;
       }
-      user.password = sails.crypto.AES.encrypt(pwd, user.email).toString();
+      user.password = sails.crypto.AES.encrypt(pwd, process.env.SALT).toString();
       user.resetPasswordToken = null;
       return user.save();
     }).then(function (savedUser) {
