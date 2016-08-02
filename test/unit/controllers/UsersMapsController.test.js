@@ -76,4 +76,34 @@ describe(TEST_NAME, function () {
       });
     });
   });
+
+  describe('PUT /users/maps/:id', function () {
+    describe('with valid parameters', function () {
+      it('should be successful', function (done) {
+        mapParams = factory.build('map', {owner: user.id})
+        request.put('/users/maps/' + mapId).set('access-token', user.accessToken).send(mapParams).end(function (err, res) {
+          res.status.should.equal(200);
+          done();
+        });
+      });
+
+      it('should be successful with provided active parameter', function (done) {
+        mapParams = factory.build('map', {owner: user.id, active: false})
+        request.put('/users/maps/' + mapId).set('access-token', user.accessToken).send(mapParams).end(function (err, res) {
+          res.status.should.equal(200);
+          done();
+        });
+      });
+    });
+
+
+    describe('with invalid parameters', function () {
+      it('should be failed and return error with invalid id or owner', function (done) {
+        request.put('/users/maps/foo').set('access-token', user.accessToken).send(mapParams).end(function (err, res) {
+          res.status.should.equal(403);
+          done();
+        });
+      });
+    });
+  });
 });
