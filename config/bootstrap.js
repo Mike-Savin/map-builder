@@ -1,6 +1,6 @@
 module.exports.bootstrap = function(cb) {
   require('express-helpers')(sails.hooks.http.app);
-  require('dotenv').config({path: 'config/env/.' + sails.config.environment});
+  require('dotenv').config({path: 'config/env/.env'});
 
   sails.q = require('q');
   sails.uuid = require('uuid');
