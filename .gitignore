@@ -15,6 +15,7 @@ npm-debug.log
 .DS_STORE
 .netbeans
 nbproject
+.editorconfig
 .idea
 .node_history
 config/env/.*
