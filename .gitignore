@@ -19,3 +19,4 @@ nbproject
 .idea
 .node_history
 config/env/.*
+config/mandrillOptions.js
